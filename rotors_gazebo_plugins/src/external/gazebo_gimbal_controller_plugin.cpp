@@ -143,7 +143,7 @@ void GimbalControllerPlugin::Init()
   this->node = transport::NodePtr(new transport::Node());
   this->node->Init(this->model->GetWorld()->GetName());
 
-  this->lastUpdateTime = this->model->GetWorld()->GetSimTime();
+  this->lastUpdateTime = this->model->GetWorld()->SimTime();
 
   // receive pitch command via gz transport
   std::string pitchTopic = std::string("~/") +  this->model->GetName() +
@@ -275,7 +275,7 @@ void GimbalControllerPlugin::OnUpdate()
   if (!this->pitchJoint || !this->rollJoint || !this->yawJoint)
     return;
 
-  common::Time time = this->model->GetWorld()->GetSimTime();
+  common::Time time = this->model->GetWorld()->SimTime();
   if (time < this->lastUpdateTime)
   {
     gzerr << "time reset event\n";
@@ -413,27 +413,27 @@ void GimbalControllerPlugin::OnUpdate()
     gazebo::msgs::Any m;
     m.set_type(gazebo::msgs::Any_ValueType_DOUBLE);
 
-    m.set_double_value(this->pitchJoint->GetAngle(0).Radian());
+    m.set_double_value(this->pitchJoint->Position(0));
     this->pitchPub->Publish(m);
 
-    m.set_double_value(this->rollJoint->GetAngle(0).Radian());
+    m.set_double_value(this->rollJoint->Position(0));
     this->rollPub->Publish(m);
 
-    m.set_double_value(this->yawJoint->GetAngle(0).Radian());
+    m.set_double_value(this->yawJoint->Position(0));
     this->yawPub->Publish(m);
 #else
     std::stringstream ss;
     gazebo::msgs::GzString m;
 
-    ss << this->pitchJoint->GetAngle(0).Radian();
+    ss << this->pitchJoint->Position(0);
     m.set_data(ss.str());
     this->pitchPub->Publish(m);
 
-    ss << this->rollJoint->GetAngle(0).Radian();
+    ss << this->rollJoint->Position(0);
     m.set_data(ss.str());
     this->rollPub->Publish(m);
 
-    ss << this->yawJoint->GetAngle(0).Radian();
+    ss << this->yawJoint->Position(0);
     m.set_data(ss.str());
     this->yawPub->Publish(m);
 #endif

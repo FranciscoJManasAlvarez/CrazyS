@@ -29,11 +29,14 @@
 #include <stdio.h>
 
 #include <boost/bind.hpp>
+#include <boost/array.hpp>
 #include <gazebo/common/common.hh>
 #include <gazebo/common/Plugin.hh>
 #include <gazebo/gazebo.hh>
 #include <gazebo/physics/physics.hh>
 #include <opencv2/core/core.hpp>
+#include <ignition/math/Vector3.hh>
+#include <ignition/math/Pose3.hh>
 
 #include <mav_msgs/default_topics.h>  // This comes from the mav_comm repo
 

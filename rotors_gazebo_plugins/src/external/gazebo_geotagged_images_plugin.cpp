@@ -80,7 +80,7 @@ void GeotaggedImagesPlugin::Load(sensors::SensorPtr sensor, sdf::ElementPtr sdf)
 #if GAZEBO_MAJOR_VERSION >= 8
   lastImageTime_ = scene_->SimTime();
 #else
-  lastImageTime_ = scene_->GetSimTime();
+  lastImageTime_ = scene_->SimTime();
 #endif
 
 #if GAZEBO_MAJOR_VERSION >= 7
@@ -158,7 +158,7 @@ void GeotaggedImagesPlugin::OnNewFrame(const unsigned char * image)
 #if GAZEBO_MAJOR_VERSION >= 8
   common::Time currentTime = scene_->SimTime();
 #else
-  common::Time currentTime = scene_->GetSimTime();
+  common::Time currentTime = scene_->SimTime();
 #endif
   if (currentTime.Double() - lastImageTime_.Double() < storeIntervalSec_) {
     return;

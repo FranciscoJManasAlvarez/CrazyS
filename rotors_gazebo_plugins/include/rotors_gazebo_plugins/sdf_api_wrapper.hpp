@@ -32,7 +32,7 @@ namespace gazebo {
   class SdfVector3 : public sdf::Vector3 {
   /*
   A wrapper class for deprecated sdf::Vector3 class to provide the same accessor
-  functions as in the newer ignition::math::Vector3 class.
+  functions as in the newer ignition::ignition::math::Vector3d class.
   */
 
    public:
